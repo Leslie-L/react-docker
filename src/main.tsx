@@ -1,10 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+
 import App from './App.tsx'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+const client = new ApolloClient({
+  uri: 'https://apibooks-qgg0.onrender.com',
+  cache: new InMemoryCache(),
+});
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  <ApolloProvider client={client}>
     <App />
-  </React.StrictMode>,
-)
+  </ApolloProvider>,
+);
